@@ -35,7 +35,7 @@ class Scene{
   }
 
   Future<void> makeHtml(DivElement sceneDiv, postSnapshots, preSnapshots) {
-    return null;
+    return Future.value(null);
   }
 
   Map makePostSnapshots(world) {
