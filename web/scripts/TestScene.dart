@@ -17,7 +17,8 @@ class TestScene extends Scene{
   @override
   WeighList getPossibleSceneList(world){
     WeighList<String> wl = WeighList();
-    wl.add("test_scene", 1);
+    wl.add("test_scene", 5);
+    wl.add("return_scene", 1);
     return wl;
   }
 }

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:html';
 
+import 'ReturnScene.dart';
 import 'TestScene.dart';
 import 'WeighList.dart';
 
@@ -35,12 +36,18 @@ class Scene{
     if(ID == "test_scene"){
       return TestScene();
     }
+    if(ID == "return_scene"){
+      return ReturnScene();
+    }
     throw "Tried to make nonexistant Scene $ID";
   }
 
   String nameFromID(String ID) {
     if(ID == "test_scene"){
       return TestScene.longName;
+    }
+    if(ID == "return_scene"){
+      return ReturnScene.longName;
     }
     throw "Tried to get the name of nonexistent Scene $ID";
   }
@@ -72,6 +79,7 @@ class Scene{
     if(debug || manual){
       List<String> buttonSceneList = List<String>();
       if(debug){
+        container.appendText(worldList.toString());
         buttonSceneList.add(newScene);
       }
       if(manual){
