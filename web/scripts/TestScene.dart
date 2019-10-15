@@ -1,6 +1,7 @@
 import 'dart:html';
 
 import 'Scene.dart';
+import 'WeighList.dart';
 
 class TestScene extends Scene{
 
@@ -12,5 +13,11 @@ class TestScene extends Scene{
   Future<void> makeHtml(DivElement sceneDiv, postSnapshots, preSnapshots) {
     sceneDiv.setInnerHtml("hello");
     return Future.value(null);
+  }
+  @override
+  WeighList getPossibleSceneList(world){
+    WeighList<String> wl = WeighList();
+    wl.add("test_scene", 1);
+    return wl;
   }
 }
