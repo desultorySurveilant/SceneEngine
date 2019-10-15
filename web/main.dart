@@ -6,5 +6,5 @@ import 'scripts/TestScene.dart';
 void main() {
   Element output = querySelector('#output');
   Scene start = TestScene();
-  start([null], output);
+  start([null], container: output);
 }
