@@ -76,20 +76,21 @@ class Scene{
   Future doNext(world, worldList, container, debug, manual){
     WeighList<String> possibleSceneList = getPossibleSceneList(world);
     String newScene = possibleSceneList.pickRandom(world.random);
-    if(debug || manual){
+    if(debug || manual){//this section lets it advance one at a time
       List<String> buttonSceneList = List<String>();
       if(debug){
         container.appendText(worldList.toString());
         buttonSceneList.add(newScene);
-      }
+      }//in debug mode it shows the worldstate and lets you advance one scene at a time
       if(manual){
         buttonSceneList.addAll(possibleSceneList.items);
-      }
+      }//in manual mode it lets you pick which scene's next //query can this preserve randomness?
       Future<String> futureScene = handleButtons(buttonSceneList, container);
-      return futureScene.then((s)=>
+      //handles messing with the buttons
+      return futureScene.then((s)=>//continuing after stuff
           Scene.fromID(s)(worldList, container: container, debug: debug, manual: manual)
       );
-    }
+    }//if it's automatic, just go right on agead
     return Scene.fromID(newScene)(worldList, container: container, debug: debug, manual: manual);
   }
 
