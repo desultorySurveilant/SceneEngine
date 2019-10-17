@@ -2,8 +2,6 @@ import 'dart:async';
 import 'dart:html';
 
 import 'ReturnScene.dart';
-import 'ShipBreaks.dart';
-import 'StartScene.dart';
 import 'TestScene.dart';
 import 'WeighList.dart';
 
@@ -37,12 +35,9 @@ class Scene{
   factory Scene.fromID(String ID){
     if(ID == "test_scene"){
       return TestScene();
-    } else if(ID == "return_scene"){
+    }
+    if(ID == "return_scene"){
       return ReturnScene();
-    } else if(ID == "start"){
-      return StartScene();
-    } else if(ID == "ship_breaks"){
-      return ShipBreaks();
     }
     throw "Tried to make nonexistant Scene $ID";
   }
@@ -50,25 +45,20 @@ class Scene{
   String nameFromID(String ID) {
     if(ID == "test_scene"){
       return TestScene.longName;
-    }else if(ID == "return_scene"){
+    }
+    if(ID == "return_scene"){
       return ReturnScene.longName;
-    }else if(ID == "start"){
-      return StartScene.longName;
-    }else if(ID == "ship_breaks"){
-      return ShipBreaks.longName;
     }
     throw "Tried to get the name of nonexistent Scene $ID";
   }
 
   Future<String> handleButtons(List<String> sceneList, DivElement container){
 
-    List<ButtonElement> buttonList = List.from(sceneList.map(
-            (String sceneID) =>
-              ButtonElement()
-                ..text = nameFromID(sceneID)
-                ..setAttribute("data-scene", sceneID)
-        )
-    );//make a button for each scene in list
+    List<ButtonElement> buttonList = List.from(sceneList.map((String sceneID){
+      return ButtonElement()
+        ..text = nameFromID(sceneID)
+        ..setAttribute("data-scene", sceneID);
+    }));//make a button for each scene in list
     buttonList.forEach((ButtonElement button){
       container.append(button);
     });//append all of the buttons
@@ -78,7 +68,7 @@ class Scene{
     //get the futures of the first clicks of each of the buttons
     Future<MouseEvent> firstClick = Future.any(buttonFutures);
     //get the first button clicked
-    return firstClick.then((e) =>
+    return firstClick.then((e)=>
       (e.target as ButtonElement).getAttribute("data-scene")
     );//execute the scene assigned to the first button pressed
   }
